@@ -1,0 +1,20 @@
+{
+    "name": "lio/agents_of_shield",
+    "description": "web app pour des missions",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Lio\\AgentsOfShield\\": "src/",
+            "Database\\": "database/",
+            "Controllers\\": "controllers/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Lionel Regisseur",
+            "email": "regisseur.lionel@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
