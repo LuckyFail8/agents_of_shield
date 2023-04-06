@@ -4,9 +4,11 @@
     "type": "project",
     "autoload": {
         "psr-4": {
-            "Lio\\AgentsOfShield\\": "src/",
+            "App\\": "src/",
             "Database\\": "database/",
-            "Controllers\\": "controllers/"
+            "Controllers\\": "Controllers/",
+            "Router\\": "Router/",
+            "Exceptions\\": "Exceptions/"
         }
     },
     "authors": [
