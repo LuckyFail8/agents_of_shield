@@ -30,14 +30,25 @@ class Model
         $this->table = strtolower(explode('\\', get_class($this))[1]);
     }
 
+    protected function getPDO(): PDO
+    {
+        return static::$pdo;
+    }
+
     public function all(): array
     {
         $statement = $this->getPDO()->query("SELECT * FROM {$this->table}");
         return $statement->fetchAll();
     }
 
-    protected function getPDO(): PDO
+    public function getAllPersonType(): array
     {
-        return static::$pdo;
+        $query = "SELECT t.*, p.*, c.name AS country_name
+                FROM $this->table t
+                JOIN person p ON t.person_id = p.id
+                LEFT JOIN country c ON p.country_id = c.id
+                ";
+        $statement = $this->getPDO()->query($query);
+        return $statement->fetchAll();
     }
 }

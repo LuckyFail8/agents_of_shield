@@ -14,14 +14,54 @@
 
         Deserunt dolor mollit dolor non nulla laborum sit consequat enim. Non commodo irure laborum exercitation aliqua tempor amet enim. Dolor adipisicing nostrud occaecat sit officia laboris consequat. Sit aliqua amet commodo velit et culpa. Tempor incididunt occaecat proident aliqua eiusmod. Esse cupidatat dolore laborum voluptate veniam exercitation proident velit do pariatur culpa pariatur anim.
     </p>
-    <?php foreach ($persons as $person) : ?>
-        <ul>
-            <li><?= $person->name . ' ' . $person->last_name ?></li>
-            <ul>
-                <li><?= $person->person_type ?></li>
-            </ul>
-        </ul>
-    <?php endforeach ?>
+    <section>
+        <h2>Agents</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Pays</th>
+                    <th>Code d'identification</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($agents as $agent) : ?>
+                    <tr>
+                        <td><?= $agent->last_name ?></td>
+                        <td><?= $agent->name ?></td>
+                        <td><?= $agent->country_name ?></td>
+                        <td><?= $agent->identification_code ?></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Contacts</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Pays</th>
+                    <th>Nom de code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($contacts as $contact) : ?>
+                    <tr>
+                        <td><?= $contact->last_name ?></td>
+                        <td><?= $contact->name ?></td>
+                        <td><?= $contact->country_name ?></td>
+                        <td><?= $contact->code_name ?></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </section>
 </body>
 
 </html>

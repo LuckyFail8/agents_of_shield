@@ -8,6 +8,7 @@
             "Database\\": "database/",
             "Controllers\\": "Controllers/",
             "Models\\": "Models/",
+            "Repositories\\": "Repositories/",
             "Router\\": "Router/",
             "Exceptions\\": "Exceptions/"
         }

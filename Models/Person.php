@@ -2,6 +2,6 @@
 
 namespace Models;
 
-class Person extends Model
+interface Person
 {
 }
