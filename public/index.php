@@ -1,6 +1,6 @@
 <?php
 
-use Exceptions\RouteNotFoundException;
+use App\App;
 use Router\Router;
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -13,8 +13,5 @@ $router = new Router();
 
 $router->register('/', ['Controllers\HomeController', 'index']);
 
-try {
-    echo $router->resolve($_SERVER['REQUEST_URI']);
-} catch (RouteNotFoundException $e) {
-    echo $e->getMessage();
-}
+
+(new App($router, $_SERVER['REQUEST_URI']))->run();

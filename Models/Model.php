@@ -15,30 +15,28 @@ class Model
     {
         try {
             static::$pdo = new PDO(
-                "
-            mysql:dbname=" . Constant::DB_NAME . ";host=" . Constant::DB_HOST,
+                'mysql:dbname=' . Constant::DB_NAME . ';host=' . Constant::DB_HOST,
                 Constant::DB_USERNAME,
                 Constant::DB_PASSWORD,
                 [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-                    PDO::MYSQL_ATTR_INIT_COMMAND => 'SET CHARACTERE SET UTF-8'
                 ]
             );
         } catch (PDOException $e) {
             $e->getMessage();
             die();
         }
-        $this->table = strtolower(explode('\\', get_class($this))[1]) . 's';
+        $this->table = strtolower(explode('\\', get_class($this))[1]);
     }
 
-    public function all()
+    public function all(): array
     {
         $statement = $this->getPDO()->query("SELECT * FROM {$this->table}");
-        return $statement;
+        return $statement->fetchAll();
     }
 
-    public function getPDO(): PDO
+    protected function getPDO(): PDO
     {
         return static::$pdo;
     }

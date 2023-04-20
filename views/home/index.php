@@ -14,6 +14,14 @@
 
         Deserunt dolor mollit dolor non nulla laborum sit consequat enim. Non commodo irure laborum exercitation aliqua tempor amet enim. Dolor adipisicing nostrud occaecat sit officia laboris consequat. Sit aliqua amet commodo velit et culpa. Tempor incididunt occaecat proident aliqua eiusmod. Esse cupidatat dolore laborum voluptate veniam exercitation proident velit do pariatur culpa pariatur anim.
     </p>
+    <?php foreach ($persons as $person) : ?>
+        <ul>
+            <li><?= $person->name . ' ' . $person->last_name ?></li>
+            <ul>
+                <li><?= $person->person_type ?></li>
+            </ul>
+        </ul>
+    <?php endforeach ?>
 </body>
 
 </html>
