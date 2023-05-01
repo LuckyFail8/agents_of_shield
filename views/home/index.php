@@ -20,6 +20,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Pays</th>
@@ -29,6 +30,7 @@
             <tbody>
                 <?php foreach ($agents as $agent) : ?>
                     <tr>
+                        <td><?= $agent->agent_id ?></td>
                         <td><?= $agent->last_name ?></td>
                         <td><?= $agent->name ?></td>
                         <td><?= $agent->country_name ?></td>
@@ -44,6 +46,7 @@
         <table>
             <thead>
                 <tr>
+                    <th>ID</th>
                     <th>Nom</th>
                     <th>Prénom</th>
                     <th>Pays</th>
@@ -53,10 +56,37 @@
             <tbody>
                 <?php foreach ($contacts as $contact) : ?>
                     <tr>
+                        <td><?= $contact->contact_id ?></td>
                         <td><?= $contact->last_name ?></td>
                         <td><?= $contact->name ?></td>
                         <td><?= $contact->country_name ?></td>
                         <td><?= $contact->code_name ?></td>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
+    </section>
+    <section>
+        <h2>Cibles</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prénom</th>
+                    <th>Pays</th>
+                    <th>Nom de code</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($targets as $target) : ?>
+                    <tr>
+                        <td><?= $target->target_id ?></td>
+                        <td><?= $target->last_name ?></td>
+                        <td><?= $target->name ?></td>
+                        <td><?= $target->country_name ?></td>
+                        <td><?= $target->code_name ?></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>

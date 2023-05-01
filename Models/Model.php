@@ -35,7 +35,7 @@ class Model
         return static::$pdo;
     }
 
-    public function all(): array
+    public function findAll(): array
     {
         $statement = $this->getPDO()->query("SELECT * FROM {$this->table}");
         return $statement->fetchAll();
@@ -43,11 +43,18 @@ class Model
 
     public function getAllPersonType(): array
     {
-        $query = "SELECT t.*, p.*, c.name AS country_name
+        $query = "SELECT t.id as {$this->table}_id, t.*, p.id as person_id, p.*, c.name AS country_name, c.id AS country_id
                 FROM $this->table t
                 JOIN person p ON t.person_id = p.id
                 LEFT JOIN country c ON p.country_id = c.id
                 ";
+        $statement = $this->getPDO()->query($query);
+        return $statement->fetchAll();
+    }
+
+    public function findID()
+    {
+        $query = "SELECT id FROM $this->table";
         $statement = $this->getPDO()->query($query);
         return $statement->fetchAll();
     }
