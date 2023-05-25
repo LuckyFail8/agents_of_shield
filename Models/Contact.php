@@ -3,13 +3,18 @@
 namespace Models;
 
 use Models\Model;
+use Models\Traits\CodeNameGeneratorTrait;
 
 class Contact extends Model implements Person
 {
+    use CodeNameGeneratorTrait;
+
     private ?int $id = null;
     private ?string $name = null;
     private ?string $lastName = null;
     private ?string $country = null;
+    private ?string $codeName = null;
+
 
     public function setId(?int $id): self
     {
@@ -52,5 +57,10 @@ class Contact extends Model implements Person
     public function getCountry(): string
     {
         return $this->country;
+    }
+
+    public function getCodeName(): string
+    {
+        return $this->codeName;
     }
 }

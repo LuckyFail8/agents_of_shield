@@ -25,9 +25,27 @@ class Homecontroller
 
         $contactModel = new Contact();
         $contacts = $contactModel->getAllPersonType();
+        foreach ($contacts as $contactData) {
+            $contact = new Contact();
+            $contact->setId($contactData->contact_id);
+            $contact->setName($contactData->name);
+            $contact->setLastName($contactData->last_name);
+            $contact->setCountry($contactData->country_name);
+            $contact->setCodeName();
+            $contactData->code_name = $contact->getCodeName();
+        }
 
         $targetModel = new Target();
         $targets = $targetModel->getAllPersonType();
+        foreach ($targets as $targetData) {
+            $target = new Target();
+            $target->setId($targetData->target_id);
+            $target->setName($targetData->name);
+            $target->setLastName($targetData->last_name);
+            $target->setCountry($targetData->country_name);
+            $target->setCodeName();
+            $targetData->code_name = $target->getCodeName();
+        }
 
 
         return Renderer::make('home/index', [

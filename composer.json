@@ -10,7 +10,8 @@
             "Models\\": "Models/",
             "Repositories\\": "Repositories/",
             "Router\\": "Router/",
-            "Exceptions\\": "Exceptions/"
+            "Exceptions\\": "Exceptions/",
+            "Models\\Traits\\": "Models/Traits/" 
         }
     },
     "authors": [
