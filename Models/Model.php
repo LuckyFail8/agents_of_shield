@@ -40,6 +40,11 @@ class Model
         $statement = $this->getPDO()->query("SELECT * FROM {$this->table}");
         return $statement->fetchAll();
     }
+    public function findByID($id): array
+    {
+        $statement = $this->getPDO()->query("SELECT * FROM {$this->table} WHERE id = $id");
+        return [$statement->fetch()];
+    }
 
     public function getAllPersonType(): array
     {

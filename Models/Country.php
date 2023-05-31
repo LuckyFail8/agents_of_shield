@@ -6,12 +6,12 @@ use PDO;
 
 class Country extends Model
 {
-    private ?int $id = null;
-    private ?string $name = null;
-    private ?array $mission = null;
-    private ?array $agent = null;
-    private ?array $contact = null;
-    private ?array $target = null;
+    public ?int $id = null;
+    public ?string $name = null;
+    public ?array $mission = null;
+    public ?array $agent = null;
+    public ?array $contact = null;
+    public ?array $target = null;
 
     public function getId(): ?int
     {
@@ -48,10 +48,11 @@ class Country extends Model
 
     public function getAgent(): ?array
     {
-        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = agent");
+        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = 'agent'");
         $statement->bindValue(":country_id", $this->getId());
         $statement->execute();
-        return $statement->fetchAll(PDO::FETCH_ASSOC);
+        $agents = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $agents;
     }
     public function setAgent(?array $agent): self
     {
@@ -61,7 +62,7 @@ class Country extends Model
 
     public function getContact(): ?array
     {
-        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = contact");
+        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = 'contact'");
         $statement->bindValue(":country_id", $this->getId());
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -74,7 +75,7 @@ class Country extends Model
 
     public function getTarget(): ?array
     {
-        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = target");
+        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = 'target'");
         $statement->bindValue(":country_id", $this->getId());
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);

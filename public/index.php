@@ -10,6 +10,7 @@ define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRE
 $router = new Router();
 
 $router->register('/', ['Controllers\HomeController', 'index']);
+$router->register('/country', ['Controllers\CountryController', 'index']);
 
 
 (new App($router, $_SERVER['REQUEST_URI']))->run();
