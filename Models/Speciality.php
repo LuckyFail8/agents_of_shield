@@ -3,6 +3,7 @@
 namespace Models;
 
 use Models\Model;
+use PDO;
 
 class Speciality extends Model
 {
@@ -50,5 +51,23 @@ class Speciality extends Model
     {
         $this->mission = $mission;
         return $this;
+    }
+
+    public function getAgentBySpeciality(array $specialities): ?array
+    {
+        $placeholders = implode(',', array_fill(0, count($specialities), ('?')));
+
+        $statement = $this->getPDO()->prepare("
+        SELECT a.*, p.*
+        FROM agent a
+        INNER JOIN speciality_agent AS sa ON a.id = sa.agent_id
+        INNER JOIN speciality s ON sa.speciality_id = s.id
+        INNER JOIN person p ON a.id_person = p.id
+        WHERE s.name IN ($placeholders)
+        GROUP BY a.id
+        HAVING COUNT (DISTINCT s.id) = ?
+        ");
+        $statement->execute([...$specialities, count($specialities)]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
