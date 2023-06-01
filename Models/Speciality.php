@@ -7,10 +7,10 @@ use PDO;
 
 class Speciality extends Model
 {
-    private ?int $id = null;
-    private ?string $name = null;
-    private ?array $agent = null;
-    private ?array $mission = null;
+    public ?int $id = null;
+    public ?string $name = null;
+    public ?array $agent = null;
+    public ?array $mission = null;
 
 
     public function getId(): ?int
@@ -62,10 +62,10 @@ class Speciality extends Model
         FROM agent a
         INNER JOIN speciality_agent AS sa ON a.id = sa.agent_id
         INNER JOIN speciality s ON sa.speciality_id = s.id
-        INNER JOIN person p ON a.id_person = p.id
+        INNER JOIN person p ON a.person_id = p.id
         WHERE s.name IN ($placeholders)
         GROUP BY a.id
-        HAVING COUNT (DISTINCT s.id) = ?
+        HAVING COUNT(DISTINCT s.id) = ?
         ");
         $statement->execute([...$specialities, count($specialities)]);
         return $statement->fetchAll(PDO::FETCH_ASSOC);

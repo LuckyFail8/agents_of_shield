@@ -13,8 +13,9 @@ class CountryController
         $countries = $countryModel->findAll();
         foreach ($countries as $countryData) {
             $country = new Country;
-            $country->setId($countryData->id);
-            $country->setName($countryData->name);
+            $country
+                ->setId($countryData->id)
+                ->setName($countryData->name);
 
             $agents = $country->getAgent();
             $contacts = $country->getContact();
@@ -26,7 +27,7 @@ class CountryController
             ];
         }
 
-        return Renderer::make('country', [
+        return Renderer::make('pages/country', [
             'personByCountry' => $personByCountry,
             'countries' => $countries,
         ]);
