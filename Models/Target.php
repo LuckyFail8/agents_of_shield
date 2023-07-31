@@ -5,7 +5,7 @@ namespace Models;
 use Models\Model;
 use Models\Traits\CodeNameGeneratorTrait;
 
-class Target extends Model implements Person
+class Target extends Person
 {
     use CodeNameGeneratorTrait;
     private ?int $id = null;

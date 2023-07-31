@@ -12,7 +12,7 @@ class Homecontroller
     public function index(): Renderer
     {
         $agentModel = new Agent();
-        $agents = $agentModel->getAllPersonType();
+        $agents = $agentModel->findAll();
         foreach ($agents as $agentData) {
             $agent = new Agent();
             $agent->setId($agentData->agent_id);
@@ -24,7 +24,7 @@ class Homecontroller
         }
 
         $contactModel = new Contact();
-        $contacts = $contactModel->getAllPersonType();
+        $contacts = $contactModel->findAll();
         foreach ($contacts as $contactData) {
             $contact = new Contact();
             $contact->setId($contactData->contact_id);
@@ -36,7 +36,7 @@ class Homecontroller
         }
 
         $targetModel = new Target();
-        $targets = $targetModel->getAllPersonType();
+        $targets = $targetModel->findAll();
         foreach ($targets as $targetData) {
             $target = new Target();
             $target->setId($targetData->target_id);

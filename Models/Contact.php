@@ -5,7 +5,7 @@ namespace Models;
 use Models\Model;
 use Models\Traits\CodeNameGeneratorTrait;
 
-class Contact extends Model implements Person
+class Contact extends Person
 {
     use CodeNameGeneratorTrait;
 

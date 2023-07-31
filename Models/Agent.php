@@ -5,7 +5,7 @@ namespace Models;
 use Models\Model;
 use PDO;
 
-class Agent extends Model implements Person
+class Agent extends Person
 {
     private ?int $id = null;
     private ?string $name = null;
