@@ -1,12 +1,12 @@
 <?php
 
-namespace Models;
+namespace App\Database;
 
-use App\Constant;
 use PDO;
-use PDOException;
+use App\Constant;
+use App\Exceptions\PDOException;
 
-class Model
+class DBConnection
 {
     protected static PDO $pdo;
     protected string $table;
@@ -27,29 +27,12 @@ class Model
             $e->getMessage();
             die();
         }
-        $this->table = strtolower(explode('\\', get_class($this))[1]);
+        $this->table = strtolower(explode('\\', get_class($this))[2]);
+        var_dump($this->table);
     }
 
     protected function getPDO(): PDO
     {
         return static::$pdo;
-    }
-
-    public function findAll(): array
-    {
-        $statement = $this->getPDO()->query("SELECT * FROM {$this->table}");
-        return $statement->fetchAll();
-    }
-    public function findByID($id): array
-    {
-        $statement = $this->getPDO()->query("SELECT * FROM {$this->table} WHERE id = $id");
-        return [$statement->fetch()];
-    }
-
-    public function findID()
-    {
-        $query = "SELECT id FROM $this->table";
-        $statement = $this->getPDO()->query($query);
-        return $statement->fetchAll();
     }
 }

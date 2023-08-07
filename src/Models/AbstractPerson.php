@@ -1,20 +1,13 @@
 <?php
 
-namespace Models;
+namespace App\Models;
 
-use Models\Model;
-use Models\Traits\CodeNameGeneratorTrait;
-
-class Contact extends Person
+abstract class AbstractPerson extends Model
 {
-    use CodeNameGeneratorTrait;
-
-    private ?int $id = null;
-    private ?string $name = null;
-    private ?string $lastName = null;
-    private ?string $country = null;
-    private ?string $codeName = null;
-
+    protected ?int $id = null;
+    protected ?string $name = null;
+    protected ?string $lastName = null;
+    protected ?string $country = null;
 
     public function setId(?int $id): self
     {
@@ -25,7 +18,6 @@ class Contact extends Person
     {
         return $this->id;
     }
-
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -57,10 +49,5 @@ class Contact extends Person
     public function getCountry(): string
     {
         return $this->country;
-    }
-
-    public function getCodeName(): string
-    {
-        return $this->codeName;
     }
 }

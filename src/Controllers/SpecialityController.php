@@ -1,9 +1,9 @@
 <?php
 
-namespace Controllers;
+namespace App\Controllers;
 
 use App\Renderer;
-use Models\Speciality;
+use App\Models\Speciality;
 
 class SpecialityController
 {

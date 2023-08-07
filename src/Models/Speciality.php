@@ -1,9 +1,9 @@
 <?php
 
-namespace Models;
+namespace App\Models;
 
-use Models\Model;
 use PDO;
+use App\Models\Model;
 
 class Speciality extends Model
 {

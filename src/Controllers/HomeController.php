@@ -1,11 +1,11 @@
 <?php
 
-namespace Controllers;
+namespace App\Controllers;
 
 use App\Renderer;
-use Models\Agent;
-use Models\Contact;
-use Models\Target;
+use App\Models\Agent;
+use App\Models\Target;
+use App\Models\Contact;
 
 class Homecontroller
 {

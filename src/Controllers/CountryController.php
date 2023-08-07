@@ -1,9 +1,9 @@
 <?php
 
-namespace Controllers;
+namespace App\Controllers;
 
 use App\Renderer;
-use Models\Country;
+use App\Models\Country;
 
 class CountryController
 {

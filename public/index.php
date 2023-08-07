@@ -1,7 +1,7 @@
 <?php
 
 use App\App;
-use Router\Router;
+use App\Router\Router;
 
 require __DIR__ . '/../vendor/autoload.php';
 define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR);
@@ -9,9 +9,8 @@ define('BASE_VIEW_PATH', dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRE
 
 $router = new Router();
 
-$router->register('/', ['Controllers\HomeController', 'index']);
-$router->register('/country', ['Controllers\CountryController', 'index']);
-$router->register('/speciality', ['Controllers\SpecialityController', 'index']);
-
-
+$router->register('/', ['App\Controllers\HomeController', 'index']);
+$router->register('/country', ['App\Controllers\CountryController', 'index']);
+$router->register('/speciality', ['App\Controllers\SpecialityController', 'index']);
 (new App($router, $_SERVER['REQUEST_URI']))->run();
+var_dump($_SERVER['SERVER_PROTOCOL']);

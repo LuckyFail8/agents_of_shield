@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Exceptions\RouteNotFoundException;
-use Router\Router;
+use App\Router\Router;
+use App\Exceptions\RouteNotFoundException;
 
 class App
 {
