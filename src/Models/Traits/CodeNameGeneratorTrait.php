@@ -23,7 +23,7 @@ trait CodeNameGeneratorTrait
         }
         return $this;
     }
-    public function getExistingCodeName()
+    public function getExistingCodeName(): ?string
     {
         $statement = $this->getPDO()->prepare("SELECT code_name FROM {$this->table} WHERE id = :id");
         $statement->bindValue(":id", $this->getId());

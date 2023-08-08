@@ -36,7 +36,7 @@
             <tbody>
                 <?php foreach ($agents as $agent) : ?>
                     <tr>
-                        <td><?= $agent->agent_id ?></td>
+                        <td><?= $agent->id ?></td>
                         <td><?= $agent->last_name ?></td>
                         <td><?= $agent->name ?></td>
                         <td><?= $agent->country_name ?></td>

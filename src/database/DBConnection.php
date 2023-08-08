@@ -28,7 +28,6 @@ class DBConnection
             die();
         }
         $this->table = strtolower(explode('\\', get_class($this))[2]);
-        var_dump($this->table);
     }
 
     protected function getPDO(): PDO

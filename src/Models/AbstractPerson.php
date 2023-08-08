@@ -2,19 +2,17 @@
 
 namespace App\Models;
 
+use DateTime;
+
 abstract class AbstractPerson extends Model
 {
     protected ?int $id = null;
     protected ?string $name = null;
     protected ?string $lastName = null;
-    protected ?string $country = null;
+    protected ?DateTime $dateOfBirth = null;
+    protected ?int $countryId = null;
 
-    public function setId(?int $id): self
-    {
-        $this->id = $id;
-        return $this;
-    }
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -40,14 +38,30 @@ abstract class AbstractPerson extends Model
         return $this->lastName;
     }
 
-    public function setCountry(string|int $country): self
+    public function getDateOfBirth(): ?DateTime
     {
-        $this->country = $country;
+        return $this->dateOfBirth;
+    }
+    /**
+     * set the date of birth for the person.
+     *
+     * @param  string $dateOfBirth The date of birth in the format 'YYYY-mm-dd'.
+     * @return self
+     */
+    public function setDateOfBirth(string $dateOfBirth): self
+    {
+        $this->dateOfBirth = new DateTime($dateOfBirth);
+        return $this;
+    }
+
+    public function setCountryID(string|int $countryId): self
+    {
+        $this->countryId = $countryId;
 
         return $this;
     }
-    public function getCountry(): string
+    public function getCountryId(): string
     {
-        return $this->country;
+        return $this->countryId;
     }
 }
