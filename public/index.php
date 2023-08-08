@@ -15,12 +15,3 @@ $router->register('/', ['App\Controllers\HomeController', 'index']);
 $router->register('/country', ['App\Controllers\CountryController', 'index']);
 $router->register('/speciality', ['App\Controllers\SpecialityController', 'index']);
 (new App($router, $_SERVER['REQUEST_URI']))->run();
-
-
-$agentModel = new Agent;
-$agent = $agentModel
-    ->setLastName('Domingez')
-    ->setName('Tony')
-    ->setDateOfBirth('2000-03-25');
-$agent = $agentModel->setIdentificationCode();
-// $agentModel->create($agent);

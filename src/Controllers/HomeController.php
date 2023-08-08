@@ -21,7 +21,6 @@ class Homecontroller
             $agent->setIdentificationCode();
             var_dump($agent);
         } */
-        var_dump($agents);
 
         $contactModel = new Contact();
         $contacts = $contactModel->findAll();

@@ -66,11 +66,40 @@ class Model extends DBConnection
         }
         $fieldsList = implode(', ', $fields);
         $interList = implode(', ', $inter);
-        var_dump($fieldsList);
 
         $query = "INSERT INTO {$this->table} ($fieldsList) VALUES ($interList)";
 
         return $this->request($query, $values);
+    }
+
+    public function update(int $id, Model $model)
+    {
+        $fields = [];
+        $values = [];
+
+        foreach ($model as $field => $value) {
+            if ($value !== null && $field !== "db" && $field !== "table") {
+                $field = $this->camelCaseToSnakeCase($field);
+
+                if ($value instanceof DateTime) {
+                    $value = $value->format('Y-m-d');
+                }
+                $fields[] = "$field = ?";
+                $values[] = $value;
+            }
+        }
+        $values[] = $id;
+
+        $fieldsList = implode(', ', $fields);
+
+        $query = "UPDATE {$this->table} SET $fieldsList WHERE id = ?";
+
+        return $this->request($query, $values);
+    }
+
+    public function delete(int $id)
+    {
+        return $this->request("DELETE FROM {$this->table} WHERE id = ?", [$id]);
     }
 
     public function request(string $sql, array $attributs = null)
@@ -82,6 +111,18 @@ class Model extends DBConnection
         } else {
             return $this->getPDO()->query($sql);
         }
+    }
+
+    public function hydrate(array $data)
+    {
+        foreach ($data as $key => $value) {
+            $setter = 'set' . ucfirst($key);
+
+            if (method_exists($this, $setter)) {
+                $this->$setter($value);
+            }
+        }
+        return $this;
     }
 
     private function camelCaseToSnakeCase(string $string): string
