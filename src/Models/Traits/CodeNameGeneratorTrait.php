@@ -8,20 +8,23 @@ trait CodeNameGeneratorTrait
 {
     public function setCodeName(): self
     {
-        if (!isset($this->codeName)) {
-            $existingCodeName = $this->getExistingCodeName();
-            if ($existingCodeName) {
-                $this->codeName = $existingCodeName;
-            } else {
-                $prefix = substr($this->name, 0, 2);
-                $suffix = substr($this->lastName, -2, 2);
-                $random_number = str_pad(rand(1, 999), 3, '0', STR_PAD_LEFT);
-                $this->codeName = strtoupper($prefix . $suffix . $random_number . substr($this->table, 0, 1));
-
+        if ($this->getExistingCodeName() !== null) {
+            if (!$this->checkCodeName($this->getExistingCodeName())) {
+                $this->createCodeName();
                 $this->updateCodeName();
             }
+            return $this;
+        } else {
+            $this->createCodeName();
         }
         return $this;
+    }
+    private function createCodeName(): string
+    {
+        $prefix = substr($this->name, 0, 2);
+        $suffix = substr($this->lastName, -2, 2);
+        $random_number = str_pad(rand(1, 999), 3, '0', STR_PAD_LEFT);
+        return $this->codeName = strtoupper($prefix . $suffix . $random_number . substr($this->table, 0, 1));
     }
     public function getExistingCodeName(): ?string
     {
@@ -37,5 +40,16 @@ trait CodeNameGeneratorTrait
         $statement->bindValue(":code_name", $this->codeName);
         $statement->bindValue(":id", $this->getId());
         $statement->execute();
+    }
+
+    private function checkCodeName(string $codeName): bool
+    {
+        $checkFirst4characts = preg_match('/[A-Z]/', substr($codeName, 0, 4));
+        $checkLast3characts = preg_match('/[0-9]/', substr($codeName, 4, 3));
+
+        if ($checkFirst4characts && $checkLast3characts) {
+            return true;
+        }
+        return false;
     }
 }
