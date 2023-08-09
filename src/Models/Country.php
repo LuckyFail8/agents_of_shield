@@ -12,15 +12,11 @@ class Country extends Model
     public ?array $agent = null;
     public ?array $contact = null;
     public ?array $target = null;
+    public ?array $safehouse = null;
 
     public function getId(): ?int
     {
         return $this->id;
-    }
-    public function setId(?int $id): self
-    {
-        $this->id = $id;
-        return $this;
     }
 
     public function getName(): ?string
@@ -48,7 +44,7 @@ class Country extends Model
 
     public function getAgent(): ?array
     {
-        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = 'agent'");
+        $statement = $this->getPDO()->prepare("SELECT * FROM agent WHERE country_id = :country_id");
         $statement->bindValue(":country_id", $this->getId());
         $statement->execute();
         $agents = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -62,7 +58,7 @@ class Country extends Model
 
     public function getContact(): ?array
     {
-        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = 'contact'");
+        $statement = $this->getPDO()->prepare("SELECT * FROM contact WHERE country_id = :country_id");
         $statement->bindValue(":country_id", $this->getId());
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -75,7 +71,7 @@ class Country extends Model
 
     public function getTarget(): ?array
     {
-        $statement = $this->getPDO()->prepare("SELECT * FROM person WHERE country_id = :country_id AND person_type = 'target'");
+        $statement = $this->getPDO()->prepare("SELECT * FROM target WHERE country_id = :country_id");
         $statement->bindValue(":country_id", $this->getId());
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -83,6 +79,19 @@ class Country extends Model
     public function setTarget(?array $target): self
     {
         $this->target = $target;
+        return $this;
+    }
+
+    public function getSafehouse(): ?array
+    {
+        $statement = $this->getPDO()->prepare("SELECT * FROM safehouse WHERE country_id = :country_id");
+        $statement->bindValue(":country_id", $this->getId());
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function setSafehouse(?array $safehouse): self
+    {
+        $this->safehouse = $safehouse;
         return $this;
     }
 }
