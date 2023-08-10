@@ -46,6 +46,14 @@ class Model extends DBConnection
         return $statement->fetchAll();
     }
 
+    public function where(string $column, int $value): array
+    {
+        $query = "SELECT * FROM {$this->table} WHERE $column = ?";
+        $statement = $this->getPDO()->prepare($query);
+        $statement->execute([$value]);
+        return $statement->fetchAll();
+    }
+
     public function create(Model $model)
     {
         $fields = [];

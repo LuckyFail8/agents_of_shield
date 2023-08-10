@@ -9,8 +9,8 @@ class Speciality extends Model
 {
     public ?int $id = null;
     public ?string $name = null;
-    public ?array $agent = null;
-    public ?array $mission = null;
+    public array $agent = [];
+    public array $mission = [];
 
 
     public function getId(): ?int
@@ -53,9 +53,9 @@ class Speciality extends Model
         return $this;
     }
 
-    public function getAgentBySpeciality(array $specialities): ?array
+    public function getAgentsBySpecialities(array $specialities): ?array
     {
-        $placeholders = implode(',', array_fill(0, count($specialities), ('?')));
+        $placeholders = implode(', ', array_fill(0, count($specialities), ('?')));
 
         $statement = $this->getPDO()->prepare("
         SELECT a.*, p.*
@@ -68,6 +68,26 @@ class Speciality extends Model
         HAVING COUNT(DISTINCT s.id) = ?
         ");
         $statement->execute([...$specialities, count($specialities)]);
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function getAgentsBySpeciality(): array
+    {
+        $statement = $this->getPDO()->prepare("
+            SELECT a.* FROM agent a 
+            INNER JOIN speciality_agent sa ON a.id = sa.agent_id
+            WHERE sa.speciality_id = :id");
+        $statement->bindValue(":id", $this->getId());
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getMissionAssociated(): array
+    {
+        $statement = $this->getPDO()->prepare("SELECT * FROM mission WHERE speciality_required_id = :id");
+        $statement->bindValue(":id", $this->getId());
+        $statement->execute();
         return $statement->fetchAll(PDO::FETCH_ASSOC);
     }
 }
